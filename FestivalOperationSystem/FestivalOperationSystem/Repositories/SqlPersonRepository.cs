@@ -77,6 +77,22 @@ namespace FestivalOperationSystem.Repositories
         }
 
         /// <inheritdoc />
+        public List<string> GetGenres()
+        {
+            return Run(connection =>
+            {
+                List<string> genres = new List<string>();
+                using SqlDataReader reader = CreateCommand(connection, null,
+                    "SELECT GenreName FROM Genres ORDER BY GenreName").ExecuteReader();
+                while (reader.Read())
+                {
+                    genres.Add(reader.GetString(0));
+                }
+                return genres;
+            });
+        }
+
+        /// <inheritdoc />
         public int Add(Person person)
         {
             return RunInTransaction((connection, transaction) =>

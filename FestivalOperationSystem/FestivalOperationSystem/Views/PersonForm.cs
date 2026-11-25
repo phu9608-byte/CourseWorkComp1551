@@ -37,6 +37,7 @@ namespace FestivalOperationSystem.Views
                 EmploymentTypeComboBox.Items.Add(type);
             }
             EmploymentTypeComboBox.SelectedItem = EmploymentType.FullTime;
+            LoadGenres();
 
             if (existing == null)
             {
@@ -55,6 +56,19 @@ namespace FestivalOperationSystem.Views
         /// <summary>The role currently chosen in the Role box.</summary>
         private PersonRole SelectedRole => (PersonRole)RoleComboBox.SelectedItem!;
 
+        /// <summary>Fills both genre drop-down lists with the genres stored in the database.</summary>
+        private void LoadGenres()
+        {
+            OperationResult<List<string>> result = _controller.GetGenres();
+            if (!result.Success)
+            {
+                MessageBox.Show(this, result.Message, "Cannot load genres", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            Genre1ComboBox.Items.AddRange(result.Value.ToArray());
+            Genre2ComboBox.Items.AddRange(result.Value.ToArray());
+        }
+
         /// <summary>Puts the values of an existing person into the boxes.</summary>
         private void FillFields(PersonInput input)
         {
@@ -64,8 +78,8 @@ namespace FestivalOperationSystem.Views
             EmailTextBox.Text = input.Email;
 
             FeeNumericUpDown.Value = Math.Clamp(input.Fee, FeeNumericUpDown.Minimum, FeeNumericUpDown.Maximum);
-            Genre1TextBox.Text = input.Genres.ElementAtOrDefault(0) ?? string.Empty;
-            Genre2TextBox.Text = input.Genres.ElementAtOrDefault(1) ?? string.Empty;
+            Genre1ComboBox.SelectedItem = input.Genres.ElementAtOrDefault(0);
+            Genre2ComboBox.SelectedItem = input.Genres.ElementAtOrDefault(1);
 
             if (input.Role == PersonRole.Crew)
             {
@@ -91,7 +105,7 @@ namespace FestivalOperationSystem.Views
                 Telephone = TelephoneTextBox.Text,
                 Email = EmailTextBox.Text,
                 Fee = FeeNumericUpDown.Value,
-                Genres = new List<string> { Genre1TextBox.Text, Genre2TextBox.Text },
+                Genres = new List<string> { Genre1ComboBox.Text, Genre2ComboBox.Text },
                 HourlyRate = HourlyRateNumericUpDown.Value,
                 EmploymentType = (EmploymentType)EmploymentTypeComboBox.SelectedItem!,
                 WeeklyHours = (int)WeeklyHoursNumericUpDown.Value,
@@ -103,21 +117,22 @@ namespace FestivalOperationSystem.Views
         /// <summary>
         /// Marks every empty required box with an error icon.
         /// Returns true when all required boxes for the chosen role are filled in.
+        /// A drop-down list with nothing selected has empty Text, so one check covers both kinds of box.
         /// </summary>
         private bool CheckRequiredFields()
         {
-            List<TextBox> required = new List<TextBox> { NameTextBox, TelephoneTextBox, EmailTextBox };
+            List<Control> required = new List<Control> { NameTextBox, TelephoneTextBox, EmailTextBox };
             if (SelectedRole == PersonRole.Performer)
             {
-                required.AddRange(new[] { Genre1TextBox, Genre2TextBox });
+                required.AddRange(new Control[] { Genre1ComboBox, Genre2ComboBox });
             }
             else if (SelectedRole == PersonRole.Vendor)
             {
-                required.AddRange(new[] { StallNameTextBox, Category1TextBox, Category2TextBox, Category3TextBox });
+                required.AddRange(new Control[] { StallNameTextBox, Category1TextBox, Category2TextBox, Category3TextBox });
             }
 
             bool allFilled = true;
-            foreach (TextBox box in required)
+            foreach (Control box in required)
             {
                 bool isEmpty = string.IsNullOrWhiteSpace(box.Text);
                 InputErrorProvider.SetError(box, isEmpty ? "This field is required." : string.Empty);

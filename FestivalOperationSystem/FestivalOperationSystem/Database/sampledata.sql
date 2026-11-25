@@ -9,7 +9,15 @@ INSERT INTO Genres (GenreID, GenreName) VALUES
 	(1, N'Pop'),
 	(2, N'EDM'),
 	(3, N'Rock'),
-	(4, N'Jazz')
+	(4, N'Jazz'),
+	(5, N'Hip Hop'),
+	(6, N'R&B'),
+	(7, N'Indie'),
+	(8, N'Classical'),
+	(9, N'Folk'),
+	(10, N'K-Pop'),
+	(11, N'Metal'),
+	(12, N'Country')
 SET IDENTITY_INSERT Genres OFF
 GO
 

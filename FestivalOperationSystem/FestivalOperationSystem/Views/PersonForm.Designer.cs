@@ -41,9 +41,9 @@ namespace FestivalOperationSystem.Views
             FeeLabel = new Label();
             FeeNumericUpDown = new NumericUpDown();
             Genre1Label = new Label();
-            Genre1TextBox = new TextBox();
+            Genre1ComboBox = new ComboBox();
             Genre2Label = new Label();
-            Genre2TextBox = new TextBox();
+            Genre2ComboBox = new ComboBox();
             CrewGroupBox = new GroupBox();
             HourlyRateLabel = new Label();
             HourlyRateNumericUpDown = new NumericUpDown();
@@ -147,9 +147,9 @@ namespace FestivalOperationSystem.Views
             PerformerGroupBox.Controls.Add(FeeLabel);
             PerformerGroupBox.Controls.Add(FeeNumericUpDown);
             PerformerGroupBox.Controls.Add(Genre1Label);
-            PerformerGroupBox.Controls.Add(Genre1TextBox);
+            PerformerGroupBox.Controls.Add(Genre1ComboBox);
             PerformerGroupBox.Controls.Add(Genre2Label);
-            PerformerGroupBox.Controls.Add(Genre2TextBox);
+            PerformerGroupBox.Controls.Add(Genre2ComboBox);
             PerformerGroupBox.Location = new Point(20, 165);
             PerformerGroupBox.Name = "PerformerGroupBox";
             PerformerGroupBox.Size = new Size(430, 180);
@@ -185,13 +185,13 @@ namespace FestivalOperationSystem.Views
             Genre1Label.TabIndex = 2;
             Genre1Label.Text = "Genre 1:";
             //
-            // Genre1TextBox
+            // Genre1ComboBox
             //
-            Genre1TextBox.Location = new Point(110, 65);
-            Genre1TextBox.MaxLength = 50;
-            Genre1TextBox.Name = "Genre1TextBox";
-            Genre1TextBox.Size = new Size(290, 23);
-            Genre1TextBox.TabIndex = 3;
+            Genre1ComboBox.Location = new Point(110, 65);
+            Genre1ComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            Genre1ComboBox.Name = "Genre1ComboBox";
+            Genre1ComboBox.Size = new Size(200, 23);
+            Genre1ComboBox.TabIndex = 3;
             //
             // Genre2Label
             //
@@ -202,13 +202,13 @@ namespace FestivalOperationSystem.Views
             Genre2Label.TabIndex = 4;
             Genre2Label.Text = "Genre 2:";
             //
-            // Genre2TextBox
+            // Genre2ComboBox
             //
-            Genre2TextBox.Location = new Point(110, 100);
-            Genre2TextBox.MaxLength = 50;
-            Genre2TextBox.Name = "Genre2TextBox";
-            Genre2TextBox.Size = new Size(290, 23);
-            Genre2TextBox.TabIndex = 5;
+            Genre2ComboBox.Location = new Point(110, 100);
+            Genre2ComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            Genre2ComboBox.Name = "Genre2ComboBox";
+            Genre2ComboBox.Size = new Size(200, 23);
+            Genre2ComboBox.TabIndex = 5;
             //
             // CrewGroupBox
             //
@@ -448,9 +448,9 @@ namespace FestivalOperationSystem.Views
         private Label FeeLabel;
         private NumericUpDown FeeNumericUpDown;
         private Label Genre1Label;
-        private TextBox Genre1TextBox;
+        private ComboBox Genre1ComboBox;
         private Label Genre2Label;
-        private TextBox Genre2TextBox;
+        private ComboBox Genre2ComboBox;
         private GroupBox CrewGroupBox;
         private Label HourlyRateLabel;
         private NumericUpDown HourlyRateNumericUpDown;

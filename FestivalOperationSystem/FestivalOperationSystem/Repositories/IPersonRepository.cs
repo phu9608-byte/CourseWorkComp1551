@@ -26,6 +26,9 @@ namespace FestivalOperationSystem.Repositories
         /// </summary>
         Person? FindByEmail(string email);
 
+        /// <summary>Names of all music genres in the Genres table, in alphabetical order.</summary>
+        List<string> GetGenres();
+
         /// <summary>Saves a new person with their role data and returns the new ID.</summary>
         int Add(Person person);
 

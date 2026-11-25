@@ -29,6 +29,9 @@ namespace FestivalOperationSystem.Services
         /// <summary>Restores a soft-deleted person.</summary>
         void RestorePerson(int personId);
 
+        /// <summary>All music genres a performer can be given, in alphabetical order.</summary>
+        List<string> GetGenres();
+
         /// <summary>
         /// Throws <see cref="BusinessRuleException"/> if the email already belongs to someone else.
         /// Use excludePersonId = 0 when adding, or the person's own ID when editing.

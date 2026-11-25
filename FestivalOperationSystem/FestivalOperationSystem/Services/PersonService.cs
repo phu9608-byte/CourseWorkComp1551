@@ -84,6 +84,12 @@ namespace FestivalOperationSystem.Services
         }
 
         /// <inheritdoc />
+        public List<string> GetGenres()
+        {
+            return _repository.GetGenres();
+        }
+
+        /// <inheritdoc />
         public void CheckEmailAvailable(string email, int excludePersonId)
         {
             Person? owner = _repository.FindByEmail(email);

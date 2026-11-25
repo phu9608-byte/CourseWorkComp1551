@@ -88,6 +88,12 @@ namespace FestivalOperationSystem.Controllers
             });
         }
 
+        /// <summary>Genre names for the drop-down lists on the add / edit form.</summary>
+        public OperationResult<List<string>> GetGenres()
+        {
+            return Run(() => _service.GetGenres());
+        }
+
         /// <summary>
         /// Checks an email as soon as the user leaves the Email box, so a duplicate is reported early.
         /// Pass excludePersonId = 0 when adding, or the person's own ID when editing.
