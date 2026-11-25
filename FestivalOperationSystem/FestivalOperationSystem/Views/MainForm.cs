@@ -139,7 +139,9 @@ namespace FestivalOperationSystem.Views
         private void PeopleDataGridView_SelectionChanged(object sender, EventArgs e)
         {
             // Clicking a row copies its ID into the PersonID box.
-            if (PeopleDataGridView.CurrentRow?.Cells[IdColumn.Index].Value is int personId)
+            // SelectedRows is used because CurrentRow still points at the old row while this event runs.
+            if (PeopleDataGridView.SelectedRows.Count > 0
+                && PeopleDataGridView.SelectedRows[0].Cells[IdColumn.Index].Value is int personId)
             {
                 PersonIdNumericUpDown.Value = personId;
             }
